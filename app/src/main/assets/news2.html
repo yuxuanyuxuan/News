@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style type="text/css">
+ ul{
+	 list-style:none;
+	  width:300px;
+	
+	 }
+ #save{
+	 margin-left:40px;
+	 }
+	 
+</style>
+<script type="text/javascript">
+  function $$(id) {
+	  return document.getElementById(id);
+	  }
+  function pageLoad(){
+	  var strName = localStorage.getItem("keyName");
+	  var strPass = localStorage.getItem("keyPass");
+	  if(strName){
+		  $$("txtName").value = strName;
+		  }
+	if(strPass){
+		$$("txtPass").value = strPass;
+		}	  
+	  
+	  }
+  function login_click() {
+	  var strName = $$("txtName").value;
+	  var strPass = $$("txtPass").value;
+	  localStorage.setItem("keyName",strName);
+	  if($$("save").checked){
+		  localStorage.setItem("keyPass",strPass);
+		  }
+		  else{
+			  localStorage.removeItem("keyPass");
+			  }
+			  $$("spnStatus").className = "status";
+	  	  $$("spnStatus").innerHTML ="login succeeded !";}
+</script>
+</head>
+
+<body onLoad="pageLoad();">
+   <form id ="login" action="#">
+    <fieldset>
+      <legend>login</legend>
+      <ul>
+       <li class="li_top">
+         <span id="spnStatuss"></span>
+       </li>
+       <li>姓名:
+          <input id="txtName" class="inputtxt" type="text" />                        
+       </li>
+       <li>密码:
+          <input id="txtPass" class="inputtxt" type="password" />
+          
+       </li>
+       <li>
+          <input id="save" type="checkbox" />
+          保存密码?
+       </li>
+       <li class="li_bot">
+          <input name="login" clas="inputbtn" value="登录" type="button" onClick="login_click();" />
+          <input name="cancel" class="inputbtn" type="reset" value="重置" /> 
+       </li>
+       </ul>
+    </fieldset>
+    
+   
+   </form>
+    
+
+</body>
+</html>
